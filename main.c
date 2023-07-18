@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 typedef struct p{
     float x;
@@ -7,9 +8,10 @@ typedef struct p{
 }POSITION;
 
 int main(int argc,char *argv[]){
-    int i;
+    int i,j;
     int city_N;
     FILE *fp;
+    float **dist;
 
     if(argv[1]==NULL){
         printf("filename missed!\n");
@@ -38,12 +40,18 @@ int main(int argc,char *argv[]){
 
     for(i=0; i<city_N; i++){
         fscanf(fp,"%s %f %f",cityname[i],&position[i].x,&position[i].y);
+        position[i].x *= 1000;
+        position[i].y *= 1000;
         //printf("%s %f %f\n",cityname[i],position[i].x,position[i].y);
     }
 
-    //hello world
+    //完全グラフの隣接行列と重み行列を作成
+    dist = (float **)malloc(city_N * sizeof(float *));
+    for(i=0; i<city_N; i++){
+        dist[i] = (float *)malloc(city_N * sizeof(float));
+    }
 
-    //printf("%d\n",city_N);
+    
 
     return 0;
 }
